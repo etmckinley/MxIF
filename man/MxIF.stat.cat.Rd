@@ -11,7 +11,7 @@ MxIF.stat.cat(file)
 }
 \description{
 This function concatenates stats files into one CSV.
-Eliot McKinley 9/15/17
+Eliot McKinley 10/4/17
 }
 \examples{
 MxIF.stat.cat(file)

@@ -1,7 +1,7 @@
 #' MxIF Stat Cat
 #'
 #' This function concatenates stats files into one CSV.
-#' Eliot McKinley 9/15/17
+#' Eliot McKinley 10/4/17
 #' @param file location of folder containing stats files
 #' @keywords stats concatenate MxIF
 #' @export
