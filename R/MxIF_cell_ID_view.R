@@ -17,16 +17,19 @@ MxIF.cell.ID.view <- function(AFRemoved, LABELS, IDs, alpha=.3){
   library(tiff)
   library(png)
   
+  #create RGB array with AFRemoved image
   Out=array(0,c(nrow(AFRemoved),ncol(AFRemoved),3))
   Out[,,1:3]=AFRemoved
   Red=Out[,,1]
   
-  
+  #find the cell ID requested
   LABELS.filt=ifelse(LABELS %in%IDs, 1, 0)
   LABELS.filt=matrix(LABELS.filt, nrow=nrow(LABELS), byrow=FALSE)
   
+  #add to the overlay
   Red[LABELS.filt==1]=alpha
   
+  #replace the Red channel with overlay
   Out[,,1]=Red
   
   return(Out)

@@ -24,5 +24,4 @@ MxIF.cell.filter <- function(data, MinCellSize=150, MaxCellSize=2000, MinNucSize
   data=subset(data, Cyt_Area > MinCytSize)
 
   return(data)
-
   }

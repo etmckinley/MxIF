@@ -16,9 +16,12 @@
 #' 
 
 MxIF.tsne <- function(data, markers, seed=42 , perplexity=50, iterations=1000, verbose=TRUE){
+  
   set.seed(seed)
   rtsne_out <- Rtsne(as.matrix(data[,markers]), verbose=verbose, perplexity=perplexity, max_iter=iterations, dims=2)
-  data$tSNE1= rtsne_out$Y[,1] #insert tSNE coordinates into table
+  
+  #insert tSNE coordinates into table
+  data$tSNE1= rtsne_out$Y[,1] 
   data$tSNE2= rtsne_out$Y[,2]
   
   return(data)

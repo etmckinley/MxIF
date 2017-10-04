@@ -31,13 +31,13 @@ MxIF.tsne.animate <- function(data, markers, file,  colors= "colorblind", sz=1.5
     colors=c("#000000", "#920000", "#006ddb")
   }
   
-  #get max_min_limit
+  
   img <- image_graph(1000, 1000, res = 96)
   data=data[,markers]
   data=melt(data , id=c("tSNE1","tSNE2"))
   data=split(data,data$variable)
   out=lapply(data,function(data){
-    max_limit=  as.numeric(quantile(data$value, highQ, na.rm=TRUE) ) #median_val+sd_num*sd_val
+    max_limit=  as.numeric(quantile(data$value, highQ, na.rm=TRUE) )
     min_limit=as.numeric(quantile(data$value, lowQ, na.rm=TRUE) )
     p=ggplot(posData, aes(tSNE1,tSNE2) )+geom_point(aes(color=data$value) ,size=sz, na.rm=TRUE)+
       scale_color_gradientn(colors=colors, limits=c(min_limit,max_limit), na.value=colors[length(colors)])+#,  breaks=c(min_limit,max_limit), labels=c("low", "high"))+
@@ -46,12 +46,7 @@ MxIF.tsne.animate <- function(data, markers, file,  colors= "colorblind", sz=1.5
             plot.background=element_blank(), legend.position="none", 
             legend.title = element_blank(), legend.key = element_blank())+
       ggtitle(data$variable)
-    #print(p)
-    
-    # 
-    # p <- ggplot(data, aes(tSNE1, tSNE2, size = 1, color = value)) +
-    #   geom_point() + 
-    #   ggtitle(data$variable) + theme_classic()
+
      print(p)
     
   } )
@@ -59,7 +54,7 @@ MxIF.tsne.animate <- function(data, markers, file,  colors= "colorblind", sz=1.5
   
   img <- image_background(image_trim(img), 'white')
   animation <- image_animate(img, fps = 1)
-  #print(animation)
+
   image_write(animation, file)
   options(warn=0)
 }
