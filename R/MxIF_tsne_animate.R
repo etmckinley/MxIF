@@ -33,7 +33,7 @@ MxIF.tsne.animate <- function(data, markers, file,  colors= "colorblind", sz=1.5
   
   
   img <- image_graph(1000, 1000, res = 96)
-  data=data[,markers]
+  data=data[,c(markers, ncol(data)-1, ncol(data))]
   data=melt(data , id=c("tSNE1","tSNE2"))
   data=split(data,data$variable)
   out=lapply(data,function(data){
