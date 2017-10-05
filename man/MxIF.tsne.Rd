@@ -4,13 +4,15 @@
 \alias{MxIF.tsne}
 \title{MxIF tSNE}
 \usage{
-MxIF.tsne(data, markers, seed = 42, perplexity = 50, iterations = 1000,
-  verbose = TRUE)
+MxIF.tsne(data, markers, label = c("tSNE1", "tSNE2"), seed = 42,
+  perplexity = 50, iterations = 1000, verbose = TRUE)
 }
 \arguments{
 \item{data}{data frame of cell data from Matlab based segmentation}
 
 \item{markers}{columns for each marker to run tSNE on}
+
+\item{label}{column name for tSNE, default= c('tSNE1', 'tSNE2')}
 
 \item{seed}{set seed for tSNE, default=42}
 
