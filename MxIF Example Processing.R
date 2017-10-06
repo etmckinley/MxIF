@@ -6,6 +6,8 @@ library(magick)
 library(reshape)
 library(MxIF)
 
+## If using 
+
 DIRECTORY='/Users/etmckinley/Dropbox (VUMC)/scan_alpha/TCPS4A/SegQuant'
 
 dir.create(paste(DIRECTORY, 'tSNE', sep="/"), showWarnings = FALSE)
@@ -17,8 +19,6 @@ Stats.spots=list.files(path = paste(DIRECTORY, 'PosStats', sep="/"))
 
 for (i in 1:50){
 posData=read.csv(paste(DIRECTORY, 'PosStats', Stats.spots[i], sep="/"), header=TRUE) #7480
-
-totalCells=nrow(posData)
 
 posData=MxIF.cell.filter(posData) #7097
 
@@ -63,10 +63,6 @@ NOVLP=readPNG(paste(DIRECTORY, 'Novlp', Novlp.spots[i] , sep="/"))
 
 NOVLP=MxIF.cell.filter.view(posData, LABELS, NOVLP)
 
-remainingCells=nrow(posData)
-cat(i,"")
-cat(100*remainingCells/totalCells,"")
-
 dir.create(paste(DIRECTORY, 'Novlp_filt', sep="/"), showWarnings = FALSE)
 
 filtFile=gsub("Novlp", "Novlp_filt", Novlp.spots[i])
@@ -76,7 +72,7 @@ writePNG(NOVLP, target=paste(DIRECTORY, 'Novlp_filt', filtFile,sep="/"))
 
 }
 
-# AFRemoved=readTIFF('/Users/etmckinley/Dropbox (VUMC)/scan_alpha/TCPS4A/AFRemoved/ECAD_AFRemoved_pyr16_spot_000.tif', convert=TRUE)
+ AFRemoved=readTIFF('/Users/etmckinley/Dropbox (VUMC)/scan_alpha/TCPS4A/AFRemoved/ECAD_AFRemoved_pyr16_spot_000.tif', convert=TRUE)
 # IDs=c(100,500,1000,1500)
 # 
 # cellsize=posData[order(-posData[,31]),]

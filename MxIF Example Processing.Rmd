@@ -1,0 +1,89 @@
+---
+title: "MxIF example Processing"
+output: html_notebook
+---
+
+
+This example assumes that imagin data was processed and segmented using the Matlab scripts.
+
+Load libraries and set the directory of the processed data for an individual slide:
+```{r}
+library(tiff)
+library(ggplot2)
+library(png)
+library(Rtsne)
+library(magick)
+library(reshape)
+library(MxIF)
+library(jpeg)
+
+DIRECTORY='/Users/etmckinley/Dropbox (VUMC)/Research/Projects/GE Multiplex/R Code/MxIF/Example Data'
+list.dirs(DIRECTORY)
+```
+
+Get the file names for Novlp segmentation image, the final cell segmentation image defining cell IDs, and the Statistics file for each position
+```{r}
+#
+Novlp.spots=list.files(path = paste(DIRECTORY, 'Novlp', sep="/"))
+Labels.spots=list.files(path = paste(DIRECTORY, 'CellSegFinal', sep="/"))
+Stats.spots=list.files(path = paste(DIRECTORY, 'PosStats', sep="/"))
+```
+
+Example filtering and tSNE map using only the first position. A loop through all positions is included below.
+```{r}
+i=1
+#Read in the stats data
+posData=read.csv(paste(DIRECTORY, 'PosStats', Stats.spots[i], sep="/"), header=TRUE) #7480 cells using example data
+
+#Filter out cells by size based upon the default parameters
+posData=MxIF.cell.filter(posData) #4974 cells using example data
+
+#Set the markers to run tSNE on, this example only uses Median Cell Values
+markers=seq(from = 9, to = ncol(posData), by = 4)
+
+#Find the column containing DAPI and exclude from the tSNE calcutions
+dapiInd=as.numeric(grep("Median_Cell_DAPI", names(posData), value = FALSE))
+markers=markers[!markers %in% dapiInd]
+
+#run tSNE using the default parameters for the selected markers
+posData=MxIF.tsne(posData, markers)
+
+#diplay tSNE plot for Beta-Catenin
+MxIF.tsne.plot(posData,9)
+
+#save animated gif
+MxIF.tsne.animate(posData, markers, paste(DIRECTORY,"animated_gif.gif", sep="/"))
+```
+
+To view the cells filtered
+```{r}
+library(tiff)
+library(png)
+
+#Read in the individual CellSegImage (LABELS) and NOVLP images 
+LABELS=readTIFF(paste(DIRECTORY, 'CellSegFinal' , Labels.spots[i] ,sep="/"), as.is=TRUE)
+NOVLP=readPNG(paste(DIRECTORY, 'Novlp', Novlp.spots[i] , sep="/"))
+NOVLP=MxIF.cell.filter.view(posData, LABELS, NOVLP)
+writePNG(NOVLP, target=paste(DIRECTORY, 'Cells_filtered.png',sep="/"))
+```
+
+To overlay selected cells on an image
+```{r}
+# Read in labels image and AFremoved image
+LABELS=readTIFF(paste(DIRECTORY, 'CellSegFinal' , Labels.spots[i] ,sep="/"), as.is=TRUE)
+#AFRemoved=readPNG(paste(DIRECTORY, 'BCAT_AFRemoved_spot_000.png', sep="/") )
+AFRemoved=readJPEG(paste(DIRECTORY, 'BCAT_AFRemoved_spot_000.jpg', sep="/") )
+#AFRemoved=readTIFF(paste(DIRECTORY, 'BCAT_AFRemoved_pyr16_spot_000.tif' ,sep="/"), convert=TRUE)
+
+#select the top 10 highest B-catenin expressing cells and overlay
+column_select=9
+top10=posData[order(-posData[,column_select]),]
+top10=top10[1:10,]
+top10=as.array(top10$ID)
+ 
+Out=MxIF.cell.ID.view(AFRemoved, LABELS, top10)
+ 
+writeJPEG(Out, target=paste(DIRECTORY, "B-cat_top10.jpg",sep="/"))
+
+```
+
