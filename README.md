@@ -1,4 +1,4 @@
 # MxIF
 MxIF data analysis functions
 
-See MxIF Example Processing.R for example
+See MxIF Example Processing.Rmd for example using the Example Data provided.
