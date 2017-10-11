@@ -23,7 +23,7 @@ MxIF.tsne.plot(data, marker, colors = "colorblind", sz = 1.5,
 \item{legend}{whether to show legend, default=FALSE}
 }
 \description{
-This function plots tSNE results.
+This function plots tSNE results. N.B. column names for plotting must be tSNE1 and tSNE2.
 Eliot McKinley 9/15/17
 }
 \examples{

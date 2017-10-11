@@ -23,7 +23,7 @@ MxIF.tsne.animate(data, markers, file, colors = "colorblind", sz = 1.5,
 \item{lowQ}{max percentile default=.02}
 }
 \description{
-This function plots tSNE results as an animated gif.
+This function plots tSNE results as an animated gif. N.B. column names for plotting must be tSNE1 and tSNE2.
 Eliot McKinley 9/15/17
 }
 \examples{

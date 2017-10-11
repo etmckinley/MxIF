@@ -1,6 +1,6 @@
 #' MxIF tSNE plot
 #'
-#' This function plots tSNE results.
+#' This function plots tSNE results. N.B. column names for plotting must be tSNE1 and tSNE2
 #' Eliot McKinley 9/15/17
 #' @param data data frame of cell data from Matlab based segmentation
 #' @param marker column to display
@@ -21,10 +21,10 @@ MxIF.tsne.plot <- function(data, marker,  colors= "colorblind", sz=1.5, highQ=0.
   
   library(ggplot2) 
   #set colors
-  if (colors == "colorblind"){
+  if (colors[1] == "colorblind"){
     colors=c("#000000", "#2166ac", "#4393c3", "#92c5de", "#d1e5f0", "#f7f7f7","#fddbc7", "#f4a582", "#d6604d", "#b2182b")
   }
-  if (colors =="threecolor"){
+  if (colors[1] =="threecolor"){
     colors=c("#000000", "#920000", "#006ddb")
   }
   
