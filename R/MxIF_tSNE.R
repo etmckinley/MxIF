@@ -19,8 +19,10 @@
 MxIF.tsne <- function(data, markers, label=c('tSNE1', 'tSNE2'), seed=42 , perplexity=50, iterations=1000, verbose=TRUE){
   library(Rtsne)
   
+  #data <- unique( data[ , markers] )
+  
   set.seed(seed)
-  rtsne_out <- Rtsne(as.matrix(data[,markers]), verbose=verbose, perplexity=perplexity, max_iter=iterations, dims=2, check_duplicates = TRUE)
+  rtsne_out <- Rtsne(as.matrix(data[,markers]), verbose=verbose, perplexity=perplexity, max_iter=iterations, dims=2)
   
   #insert tSNE coordinates into table
   data$rtSNE1= rtsne_out$Y[,1] 

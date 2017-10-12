@@ -39,7 +39,7 @@ MxIF.tsne.animate <- function(data, markers, file,  colors= "colorblind", sz=1.5
   out=lapply(data,function(data){
     max_limit=  as.numeric(quantile(data$value, highQ, na.rm=TRUE) )
     min_limit=as.numeric(quantile(data$value, lowQ, na.rm=TRUE) )
-    p=ggplot(posData, aes(tSNE1,tSNE2) )+geom_point(aes(color=data$value) ,size=sz, na.rm=TRUE)+
+    p=ggplot(data, aes(tSNE1,tSNE2) )+geom_point(aes(color=data$value) ,size=sz, na.rm=TRUE)+
       scale_color_gradientn(colors=colors, limits=c(min_limit,max_limit), na.value=colors[length(colors)])+#,  breaks=c(min_limit,max_limit), labels=c("low", "high"))+
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),  panel.background = element_blank(),
             text = element_text(size=14), axis.title=element_blank(), axis.ticks=element_blank(), axis.text.x=element_blank(), axis.text.y=element_blank(),
