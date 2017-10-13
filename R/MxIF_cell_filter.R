@@ -9,19 +9,21 @@
 #' @param MaxNucSize maximum nuclear area (pixels), default=1000
 #' @param MinMemSize minimum membrane area (pixels), default=20
 #' @param MinCytSize minimum cytoplasm area (pixels), default=0
+#' @param MinNucRatio minimum nuc/cell area (pixels), default=0.05
 #' @keywords filter MxIF
 #' @export
 #' @examples
 #' cell.filter(data)
 #' cell.filter(data, MinCellSize=50, MaxCellSize=2500, MinNucSize=20, MaxNucSize=1500, MinMemSize=50, MinCytSize=10)
 
-MxIF.cell.filter <- function(data, MinCellSize=150, MaxCellSize=2000, MinNucSize=30, MaxNucSize=1000, MinMemSize=20, MinCytSize=0 ){
+MxIF.cell.filter <- function(data, MinCellSize=150, MaxCellSize=2000, MinNucSize=30, MaxNucSize=1000, MinMemSize=20, MinCytSize=0, MinNucRatio=0.05 ){
   data=subset(data, Cell_Area > MinCellSize)
   data=subset(data, Cell_Area < MaxCellSize)
   data=subset(data, Nuc_Area > MinNucSize)
   data=subset(data, Nuc_Area < MaxNucSize)
   data=subset(data, Mem_Area > MinMemSize)
   data=subset(data, Cyt_Area > MinCytSize)
+  data=subset(data, Nuc_Area/Cell_Area > MinNucRatio)
 
   return(data)
   }
