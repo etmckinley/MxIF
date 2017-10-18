@@ -23,8 +23,8 @@ MxIF.cell.filter.view <- function(data, LABELS, NOVLP){
   NOVLP.B=NOVLP[,,3]
 
   #filter labels to binary of cells not filtered out
-  LABELS.filt=ifelse(LABELS %in%data$ID, 1, 0)
-  LABELS.filt=matrix(LABELS.filt, nrow=nrow(NOVLP), byrow=FALSE)
+  LABELS.filt=LABELS %in% data$ID
+  LABELS.filt=1*matrix(LABELS.filt, nrow=nrow(NOVLP), byrow=FALSE)
   
   #make yellow lines at cell boundries
   lines=NOVLP.R*NOVLP.G
