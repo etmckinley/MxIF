@@ -5,7 +5,8 @@
 \title{MxIF Cell Filtering}
 \usage{
 MxIF.cell.filter(data, MinCellSize = 150, MaxCellSize = 2000,
-  MinNucSize = 30, MaxNucSize = 1000, MinMemSize = 20, MinCytSize = 0)
+  MinNucSize = 30, MaxNucSize = 1000, MinMemSize = 20, MinCytSize = 0,
+  MinNucRatio = 0.05)
 }
 \arguments{
 \item{data}{data frame of cell data from Matlab based segmentation}
@@ -20,6 +21,8 @@ MxIF.cell.filter(data, MinCellSize = 150, MaxCellSize = 2000,
 
 \item{MinCytSize}{minimum cytoplasm area (pixels), default=0}
 
+\item{MinNucRatio}{minimum nuc/cell area (pixels), default=0.05}
+
 \item{MinCellSize}{maximum cell area (pixels), default=2000}
 }
 \description{
@@ -27,8 +30,8 @@ This function returns cells filtered for specified properties.
 Eliot McKinley 9/15/17
 }
 \examples{
-cell.filter(data)
-cell.filter(data, MinCellSize=50, MaxCellSize=2500, MinNucSize=20, MaxNucSize=1500, MinMemSize=50, MinCytSize=10)
+MxIF.cell.filter(data)
+MxIf.cell.filter(data, MinCellSize=50, MaxCellSize=2500, MinNucSize=20, MaxNucSize=1500, MinMemSize=50, MinCytSize=10)
 }
 \keyword{MxIF}
 \keyword{filter}

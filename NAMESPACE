@@ -3,6 +3,7 @@
 export(MxIF.cell.ID.view)
 export(MxIF.cell.filter)
 export(MxIF.cell.filter.view)
+export(MxIF.deconvoltion)
 export(MxIF.stat.cat)
 export(MxIF.tsne)
 export(MxIF.tsne.animate)

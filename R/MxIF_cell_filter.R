@@ -13,8 +13,8 @@
 #' @keywords filter MxIF
 #' @export
 #' @examples
-#' cell.filter(data)
-#' cell.filter(data, MinCellSize=50, MaxCellSize=2500, MinNucSize=20, MaxNucSize=1500, MinMemSize=50, MinCytSize=10)
+#' MxIF.cell.filter(data)
+#' MxIf.cell.filter(data, MinCellSize=50, MaxCellSize=2500, MinNucSize=20, MaxNucSize=1500, MinMemSize=50, MinCytSize=10)
 
 MxIF.cell.filter <- function(data, MinCellSize=150, MaxCellSize=2000, MinNucSize=30, MaxNucSize=1000, MinMemSize=20, MinCytSize=0, MinNucRatio=0.05 ){
   data=subset(data, Cell_Area > MinCellSize)
