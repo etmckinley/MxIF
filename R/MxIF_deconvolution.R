@@ -20,7 +20,7 @@
 #' MxIF.deconvolution(data, markers, slidename, file, selectedMarker='Median_Cell_GFP', quant=0.8, plots=TRUE, cellIDcols=c(1,2,24))
 
 
-MxIF.deconvoltion <- function(data, markers, slidename, file, selectedMarker='', quant=0, plots=FALSE, cellIDcols=c(1:2)){
+MxIF.deconvolution <- function(data, markers, slidename, file, selectedMarker='', quant=0, plots=FALSE, cellIDcols=c(1:2)){
   #get marker names
   BM=names(data)[markers]
   
@@ -71,7 +71,7 @@ MxIF.deconvoltion <- function(data, markers, slidename, file, selectedMarker='',
   names(newdat)=colnames(data)
   
   for( i in 1:length(BM)){
-    cat(BM[i],"")
+    #cat(BM[i],"")
     
     
     a=mc[[i]]
@@ -86,7 +86,7 @@ MxIF.deconvoltion <- function(data, markers, slidename, file, selectedMarker='',
   
   newdat2=newdat
   for(i in 1:length(BM)){
-    cat(i,"")
+    #cat(i,"")
     
     y=newdat[,BM[i]]
     x=y
@@ -117,7 +117,7 @@ MxIF.deconvoltion <- function(data, markers, slidename, file, selectedMarker='',
   if (plots==TRUE){
     pdf(file=paste0(file, '/', slidename, '_',selectedMarker,'_top' ,toString((1-quant)*100),'density_mclust_thresh.pdf'))
     for(i in 1:length(BM)){
-      cat(i,"")
+      #cat(i,"")
       
       
       k=i
