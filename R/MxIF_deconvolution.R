@@ -20,7 +20,7 @@
 #' MxIF.deconvolution(data, markers, slidename, file, selectedMarker='Median_Cell_GFP', quant=0.8, plots=TRUE, cellIDcols=c(1,2,24))
 
 
-MxIF.deconvoltion <- function(data, markers, slidename, file, selectedMarker='', quant=0, plots=FALSE, cellIDcols=c(1:2)){
+MxIF.deconvolution <- function(data, markers, slidename, file, selectedMarker='', quant=0, plots=FALSE, cellIDcols=c(1:2)){
   #get marker names
   BM=names(data)[markers]
   
