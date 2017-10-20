@@ -25,7 +25,11 @@ MxIF.death.star.plot <- function(data, markers, file, color="#0709b2", title=TRU
   
   c=c[order(c$perc, decreasing = TRUE),]
   
+<<<<<<< HEAD
   write.csv(c, file=paste0(file, '/binary_counts_data.csv'), row.names=FALSE)
+=======
+  write.csv(c, file=file, row.names=FALSE)
+>>>>>>> 74e6775b8a9e5a50abc46eda02bde2fbe9225869
   
   c$w=cumsum(c$perc)
   c$wm=c$w-c$perc
