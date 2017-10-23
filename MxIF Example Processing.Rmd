@@ -16,6 +16,7 @@ library(magick)
 library(reshape)
 library(MxIF)
 library(jpeg)
+library(plyr)
 
 DIRECTORY='/Users/etmckinley/Dropbox (VUMC)/Research/Projects/GE Multiplex/R Code/MxIF/Example Data'
 list.dirs(DIRECTORY)
@@ -71,9 +72,8 @@ To overlay selected cells on an image
 ```{r}
 # Read in labels image and AFremoved image
 LABELS=readTIFF(paste(DIRECTORY, 'CellSegFinal' , Labels.spots[i] ,sep="/"), as.is=TRUE)
-#AFRemoved=readPNG(paste(DIRECTORY, 'BCAT_AFRemoved_spot_000.png', sep="/") )
 AFRemoved=readJPEG(paste(DIRECTORY, 'BCAT_AFRemoved_spot_000.jpg', sep="/") )
-#AFRemoved=readTIFF(paste(DIRECTORY, 'BCAT_AFRemoved_pyr16_spot_000.tif' ,sep="/"), convert=TRUE)
+
 
 #select the top 10 highest B-catenin expressing cells and overlay
 column_select=9
@@ -86,6 +86,24 @@ Out=MxIF.cell.ID.view(AFRemoved, LABELS, top10)
 writeJPEG(Out, target=paste(DIRECTORY, "B-cat_top10.jpg",sep="/"))
 
 ```
+
+Using model-based binary deconvolution thresholding and creating "Death Star" Plots
+```{r}
+#Binarization on all cells while retaining Cell ID and plotting histograms
+BinaryData=MxIF.deconvolution(posData, c(9,13,17,21,29), 'SlideName', DIRECTORY, plots=TRUE)
+
+#Death star plot
+MxIF.death.star.plot(BinaryData, 3:7, DIRECTORY)
+
+#Binarization of highest 20th perentile of a marker
+BinaryData20=MxIF.deconvolution(posData, c(9,13,17,21,29), 'SlideName2', DIRECTORY, selectedMarker = names(posData)[9], quant=.8, plots=TRUE)
+
+#Death Star Plot
+MxIF.death.star.plot(BinaryData20, 3:7, DIRECTORY)
+
+
+```
+
 
 For processing multiple positions at a time.
 ```{r}
