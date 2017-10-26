@@ -6,6 +6,8 @@ output: html_notebook
 
 This example assumes that imagin data was processed and segmented using the Matlab scripts.
 
+To use the MxIF packge, the libraries below should be installed.
+
 Load libraries and set the directory of the processed data for an individual slide:
 ```{r}
 library(tiff)
@@ -14,10 +16,13 @@ library(png)
 library(Rtsne)
 library(magick)
 library(reshape)
-library(MxIF)
 library(jpeg)
 library(plyr)
+library(mclust)
 
+library(MxIF)
+
+#use your directory here
 DIRECTORY='/Users/etmckinley/Dropbox (VUMC)/Research/Projects/GE Multiplex/R Code/MxIF/Example Data'
 list.dirs(DIRECTORY)
 ```
