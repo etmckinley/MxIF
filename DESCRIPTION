@@ -1,6 +1,6 @@
 Package: MxIF
 Title: MxIF data analysis
-Version: 0.1
+Version: 0.2
 Authors@R: person("Eliot", "McKinley", email = "etmckinley@gmail.com", role = c("aut", "cre"))
 Description: Functions for MxIF data analysis
 Depends: R (>= 3.4.0)
