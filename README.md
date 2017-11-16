@@ -1,10 +1,12 @@
 # MxIF
 MxIF data analysis functions
 
-#Installation
+### Installation
+From the R (or R-Studio) command line:
+
 install.packages("devtools")
 library(devtools)
 install_github('etmckinley/MxIF')
 
-#Tutorial
+### Tutorial
 See MxIF Example Processing.Rmd for example using the Example Data provided.
